@@ -1,4 +1,6 @@
 package uz.usm.model.enums;
 
-public class UserRole {
+public enum UserRole {
+    USER_ROLE,
+    ADMIN_ROLE,
 }

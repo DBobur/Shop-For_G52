@@ -1,7 +1,6 @@
 package uz.usm.repository;
 
 import uz.usm.model.Category;
-import uz.usm.model.User;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -2,6 +2,7 @@ package uz.usm.model;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Getter
@@ -10,7 +11,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Product implements Serializable {
     private UUID id;
     private UUID ownerId;
     private String name;
@@ -18,4 +19,8 @@ public class Product {
     private int quantity;
     private Double price;
     private Category category;
+
+    {
+        this.id = UUID.randomUUID();
+    }
 }

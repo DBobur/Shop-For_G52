@@ -2,7 +2,11 @@ package uz.usm;
 
 import uz.usm.model.User;
 import uz.usm.model.enums.UserRole;
+import uz.usm.repository.CategoryRepository;
+import uz.usm.repository.ProductRepository;
 import uz.usm.repository.UserRepository;
+import uz.usm.service.CategoryService;
+import uz.usm.service.ProductService;
 import uz.usm.service.UserService;
 
 import java.util.Scanner;
@@ -14,6 +18,10 @@ public class Main {
 
     private UserRepository userRepository = new UserRepository();
     public static UserService userService = new UserService(new UserRepository());
+    private static CategoryRepository categoryRepository = new CategoryRepository();
+    public static CategoryService categoryService = new CategoryService(categoryRepository);
+    private ProductRepository productRepository = new ProductRepository();
+    public static ProductService productService = new ProductService(new ProductRepository());
 
     public static User currentUser = null;
 
@@ -54,8 +62,20 @@ public class Main {
         }
 
     }
+
+    public static double printDouble(String s) {
+        try {
+            System.out.print(s);
+            return scInt.nextDouble();
+        }catch (Exception e){
+            scInt = new Scanner(System.in);
+            return -1;
+        }
+
+    }
+
     public static String printStr(String s) {
         System.out.print(s);
-        return scInt.nextLine();
+        return scStr.nextLine();
     }
 }

@@ -2,6 +2,7 @@ package uz.usm.model;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Getter
@@ -10,7 +11,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Category implements Serializable {
     private UUID id;
     private String name;
     private String description;

@@ -15,4 +15,8 @@ public class Category {
     private String name;
     private String description;
     private Category parent;
+
+    {
+        this.id = UUID.randomUUID();
+    }
 }

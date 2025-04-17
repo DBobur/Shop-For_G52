@@ -40,4 +40,8 @@ public class UserService {
         }
         return null;
     }
+
+    public List<User> getAllUsers() {
+        return userRepository.readUsers();
+    }
 }

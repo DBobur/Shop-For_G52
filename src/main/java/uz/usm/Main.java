@@ -33,17 +33,29 @@ public class Main {
                     2.Register
                     0.Exit
                     """);
-            System.out.print("Enter your choice: ");
-            int choice = scInt.nextInt();
-            switch (choice) {
-                case 1 -> {
-                    myLogin();
-                }
-                case 2 -> {
-                    myRegister();
-                }
+
+            switch (printInt("Enter your choice: ")) {
+                case -1 -> { System.out.println("Wrong input"); }
                 case 0 -> { return; }
+                case 1 -> { myLogin(); }
+                case 2 -> { myRegister(); }
+                default -> System.out.println("Wrong choice");
             }
         }
+    }
+
+    public static int printInt(String s) {
+        try {
+            System.out.print(s);
+            return scInt.nextInt();
+        }catch (Exception e){
+            scInt = new Scanner(System.in);
+            return -1;
+        }
+
+    }
+    public static String printStr(String s) {
+        System.out.print(s);
+        return scInt.nextLine();
     }
 }

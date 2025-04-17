@@ -29,4 +29,16 @@ public class User implements Serializable {
         this.balance = 100.0;
         this.role = UserRole.USER_ROLE;
     }
+
+    @Override
+    public User clone() throws CloneNotSupportedException {
+        User user = new User();
+        user.id = id;
+        user.name = name;
+        user.username = username;
+        user.password = password;
+        user.balance = balance;
+        user.role = role;
+        return user;
+    }
 }

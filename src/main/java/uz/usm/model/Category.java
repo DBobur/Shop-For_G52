@@ -7,7 +7,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,9 +14,15 @@ public class Category implements Serializable {
     private UUID id;
     private String name;
     private String description;
-    private Category parent;
+    private UUID parentId;
 
     {
         this.id = UUID.randomUUID();
+    }
+
+    @Override
+    public String toString() {
+        return  ", name='" + name + '\'' +
+                ", description='" + description;
     }
 }

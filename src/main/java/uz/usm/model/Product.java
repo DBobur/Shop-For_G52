@@ -7,7 +7,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,9 +17,17 @@ public class Product implements Serializable {
     private String description;
     private int quantity;
     private Double price;
-    private Category category;
+    private UUID categoryId;
 
     {
         this.id = UUID.randomUUID();
+    }
+
+    @Override
+    public String toString() {
+        return  ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price;
     }
 }

@@ -4,6 +4,7 @@ import uz.usm.model.Category;
 import uz.usm.repository.CategoryRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 public class CategoryService {
     private CategoryRepository categoryRepository;
@@ -30,5 +31,14 @@ public class CategoryService {
             }
         }
         return false;
+    }
+
+    public UUID getCategoryByName(String categoryName) {
+        for (Category category : categoryRepository.readCategories()) {
+            if (category.getName().equals(categoryName)) {
+                return category.getId();
+            }
+        }
+        return null;
     }
 }

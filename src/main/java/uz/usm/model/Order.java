@@ -17,4 +17,9 @@ public class Order {
     private UUID userId;
     private OrderStatus status;
     private Map<UUID,Integer> products;
+
+    {
+        id = UUID.randomUUID();
+        status = OrderStatus.NEW;
+    }
 }

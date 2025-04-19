@@ -28,6 +28,21 @@ public class UserController {
 
     private static void userMenu() {
         System.out.println("Welcome " + currentUser.getName());
+        while (true){
+            System.out.println("""
+                    1. Buy products
+                    2. Search product
+                    3. Search products by category
+                    4. Show Orders
+                    5. Show History
+                    0. Log out
+                    """);
+            switch (printInt("Enter your choice: ")){
+                case -1 -> { System.out.println("Wrong input"); }
+                case 0 -> { return; }
+                default -> System.out.println("Wrong choice");
+            }
+        }
     }
 
     private static void adminMenu() {
@@ -46,7 +61,10 @@ public class UserController {
                 case 0 -> { return; }
                 case 1 -> { addProduct(); }
                 case 2 -> { addCategory(); }
-                case 3 -> { showCategories(); }
+                case 3 -> {
+                    //showCategories();
+                    showHierarchy();
+                }
                 case 4 -> { showProducts(); }
                 case 5 -> {
                     List<User> allUsers = userService.getAllUsers();

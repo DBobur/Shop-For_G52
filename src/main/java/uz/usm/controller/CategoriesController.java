@@ -2,54 +2,80 @@ package uz.usm.controller;
 
 import uz.usm.model.Category;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 import static uz.usm.Main.*;
 
 public class CategoriesController {
-    public static void addCategory(){
-        System.out.print("0/1/2 -> (Back/Add Parent/Add Child)\n");
-        int i = printInt("Enter your choice: ");
+    public static void addCategory() {
+        System.out.print("""
+                0. Back
+                1. Choose Parent
+                2. Continue 
+                """);
         Category category = new Category();
-        if(i==0){ return;}
-        else if(i==1){
-            List<Category> allCategories = categoryService.getAllCategories();
-            int ii = 1;
-            for (Category allCategory : allCategories) {
-                if(allCategory.getParent()==null){
-                    System.out.println(ii++ + ". " + allCategory.getName());
-                }else{
-                    System.out.println("\t" + ii++ + ". " + allCategory.getName());
-                }
+        switch (printInt("Enter your choice: ")) {
+            case -1 -> {
+                System.out.println("\u100B[32m System Failure (Wrong Input).");
             }
-            int i1 = printInt("Enter your choice: ");
-            if(i1>0 && i1<=allCategories.size()){
-                category.setParent(allCategories.get(i1-1));
-            }else {
-                System.out.println("Something Error ???");
+            case 0 -> { return; }
+            case 1 -> {
+                showHierarchy();
+                String categoryName = printStr("Enter parent category name: ");
+                category.setParentId(categoryService.getCategoryByName(categoryName));
             }
+            default -> {
+                System.out.println("\u100B[32m System Failure (Wrong Input).");
+                return;
+            }
+        }
 
-        }
-        else if(i!=2){
-            System.out.println("Invalid choice");
-            return;
-        }
-        System.out.print("Enter Category Name: ");
-        category.setName(scStr.nextLine());
-        System.out.print("Enter Category Description: ");
-        category.setDescription(scStr.nextLine());
+        category.setName(printStr("Enter category name: "));
+        category.setDescription(printStr("Enter category description: "));
+
         if (categoryService.addCategory(category)) {
-            System.out.println("Category added");
-        }else{
-            System.out.println("Category not added");
+            System.out.println("\u100B[31m System Success (Category Added).");
+        } else {
+            System.out.println("\u100B[32m System Failure (Wrong Input).");
         }
-
     }
-    public static void showCategories(){
-        List<Category> allCategories = categoryService.getAllCategories();
+    public static List<Category> showCategories(){
         int i = 1;
-        for (Category category : allCategories) {
-            System.out.println(i++ + ". " + category.getName());
+        for (Category category : categoryService.getAllCategories()) {
+            if(category.getParentId()==null){
+                System.out.println(i++ + ". " + category.getName());
+            }else{
+                System.out.println("\t" + i++ + ". " + category.getName());
+            }
+        }
+        return categoryService.getAllCategories();
+    }
+
+    public static void showHierarchy(){
+        List<Category> rootCategories = new ArrayList<>();
+        for (Category category : categoryService.getAllCategories()) {
+            if(category.getParentId()==null){
+                rootCategories.add(category);
+            }
+        }
+        int i = 1;
+        for (Category category : rootCategories) {
+            System.out.println(i++ + " " + category.getName());
+            printChildren(category,"\t");
+        }
+    }
+
+
+    private static void printChildren(Category category, String indent) {
+        int i = 1;
+        for (Category readCategory : categoryService.getAllCategories()) {
+            if (Objects.equals(readCategory.getParentId(),category.getId())) {
+                System.out.println(indent + "└ " + i++ + " " + readCategory.getName());
+                printChildren(readCategory, indent + "\t");
+            }
         }
     }
 }

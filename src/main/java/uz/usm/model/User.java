@@ -7,7 +7,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
@@ -31,7 +30,7 @@ public class User implements Serializable {
     }
 
     @Override
-    public User clone() throws CloneNotSupportedException {
+    public User clone(){
         User user = new User();
         user.id = id;
         user.name = name;
@@ -40,5 +39,13 @@ public class User implements Serializable {
         user.balance = balance;
         user.role = role;
         return user;
+    }
+
+    @Override
+    public String toString() {
+        return  ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", balance=" + balance +
+                ", role=" + role;
     }
 }

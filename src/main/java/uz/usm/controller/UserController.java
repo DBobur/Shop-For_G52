@@ -61,6 +61,7 @@ public class UserController {
                     3. Show Categories
                     4. Show Products
                     5. Show Users
+                    6. Accepted Orders
                     0. Log out
                     """);
             switch (printInt("Enter your choice: ")){
@@ -78,6 +79,9 @@ public class UserController {
                     for (User allUser : allUsers) {
                         System.out.println(allUser);
                     }
+                }
+                case 6 -> {
+                    acceptedOrders();
                 }
                 default -> System.out.println("Wrong choice");
             }

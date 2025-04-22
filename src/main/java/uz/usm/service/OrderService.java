@@ -1,6 +1,7 @@
 package uz.usm.service;
 
 import uz.usm.model.Order;
+import uz.usm.model.enums.OrderStatus;
 import uz.usm.repository.OrderRepository;
 
 import java.util.ArrayList;
@@ -29,5 +30,26 @@ public class OrderService {
             }
         }
         return userOrders;
+    }
+
+    public List<Order> getOrdersByStatus(OrderStatus orderStatus) {
+        List<Order> orders = new ArrayList<>();
+        for (Order order : repository.readOrders()) {
+            if (order.getStatus() == orderStatus) {
+                orders.add(order);
+            }
+        }
+        return orders;
+    }
+
+    public void accepted(Order order) {
+        List<Order> orders = repository.readOrders();
+        for (Order order1 : orders) {
+            if(order1.getId().equals(order.getId())) {
+                order1.setStatus(OrderStatus.BUYING);
+                repository.writeOrders(orders);
+                break;
+            }
+        }
     }
 }

@@ -33,7 +33,7 @@ public class CategoryService {
         return false;
     }
 
-    public UUID getCategoryByName(String categoryName) {
+    public UUID getCategoryIdByName(String categoryName) {
         for (Category category : categoryRepository.readCategories()) {
             if (category.getName().equals(categoryName)) {
                 return category.getId();

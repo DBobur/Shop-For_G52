@@ -7,6 +7,7 @@ import uz.usm.repository.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class ProductService {
@@ -32,5 +33,14 @@ public class ProductService {
             }
         }
         return categoryProducts;
+    }
+
+    public Product getProductById(UUID id) {
+        for (Product product : repository.readProducts()) {
+            if (product.getId().equals(id)) {
+                return product;
+            }
+        }
+        return null;
     }
 }

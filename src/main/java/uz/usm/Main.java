@@ -3,9 +3,11 @@ package uz.usm;
 import uz.usm.model.User;
 import uz.usm.model.enums.UserRole;
 import uz.usm.repository.CategoryRepository;
+import uz.usm.repository.OrderRepository;
 import uz.usm.repository.ProductRepository;
 import uz.usm.repository.UserRepository;
 import uz.usm.service.CategoryService;
+import uz.usm.service.OrderService;
 import uz.usm.service.ProductService;
 import uz.usm.service.UserService;
 
@@ -22,6 +24,8 @@ public class Main {
     public static CategoryService categoryService = new CategoryService(categoryRepository);
     private ProductRepository productRepository = new ProductRepository();
     public static ProductService productService = new ProductService(new ProductRepository());
+    private OrderRepository orderRepository = new OrderRepository();
+    public static OrderService orderService = new OrderService(new OrderRepository());
 
     public static User currentUser = null;
 

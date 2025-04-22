@@ -7,6 +7,7 @@ import java.util.List;
 import static uz.usm.Main.*;
 import static uz.usm.controller.CategoriesController.*;
 import static uz.usm.controller.ProductController.*;
+import static uz.usm.controller.OrderController.*;
 
 public class UserController {
     public static void myLogin() {
@@ -40,6 +41,12 @@ public class UserController {
             switch (printInt("Enter your choice: ")){
                 case -1 -> { System.out.println("Wrong input"); }
                 case 0 -> { return; }
+                case 1 -> {
+                    buyProducts();
+                }
+                case 4 -> {
+                    showOrders();
+                }
                 default -> System.out.println("Wrong choice");
             }
         }

@@ -19,16 +19,16 @@ public class CategoriesController {
         Category category = new Category();
         switch (printInt("Enter your choice: ")) {
             case -1 -> {
-                System.out.println("\u100B[32m System Failure (Wrong Input).");
+                System.out.println("\u001B[31m System Failure (Wrong Input).\u001B[0m");
             }
             case 0 -> { return; }
             case 1 -> {
                 showHierarchy();
                 String categoryName = printStr("Enter parent category name: ");
-                category.setParentId(categoryService.getCategoryByName(categoryName));
+                category.setParentId(categoryService.getCategoryIdByName(categoryName));
             }
             default -> {
-                System.out.println("\u100B[32m System Failure (Wrong Input).");
+                System.out.println("\u001B[31m System Failure (Wrong Input).\u001B[0m");
                 return;
             }
         }
@@ -37,11 +37,12 @@ public class CategoriesController {
         category.setDescription(printStr("Enter category description: "));
 
         if (categoryService.addCategory(category)) {
-            System.out.println("\u100B[31m System Success (Category Added).");
+            System.out.println("\u001B[32m System Success (Category Added).\u001B[0m");
         } else {
-            System.out.println("\u100B[32m System Failure (Wrong Input).");
+            System.out.println("\u001B[31m System Failure (Wrong Input).\u001B[0m");
         }
     }
+
     public static List<Category> showCategories(){
         int i = 1;
         for (Category category : categoryService.getAllCategories()) {
